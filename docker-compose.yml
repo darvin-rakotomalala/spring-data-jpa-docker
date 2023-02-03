@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  # MCS *****************************************
+  app_mcs:
+    image: spring-data-jpa:latest
+    container_name: jpa-mcs
+    build: ./
+    ports:
+      - "8081:8081"
+    restart: always
+    depends_on:
+      - dbpostgresql
+  # DB *****************************************
+  dbpostgresql:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    container_name: db-postgresql
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=poc_jpa
